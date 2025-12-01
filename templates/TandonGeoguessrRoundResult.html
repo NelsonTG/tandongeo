@@ -11,21 +11,22 @@
 <body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
   <header>
     <section class="flex flex-row justify-between">
-      <div class="ml-16 flex flex-row items-center">
+      <div class="ml-16 flex flex-row">
         <div>
-          <a href="{{ url_for('home') }}" class="text-6xl font-extrabold leading-tight">
-            Tandon Geoguesser
-          </a>
-          <p class="mt-4 text-3xl font-semibold text-gray-600">
+          <a href="{{ url_for('home') }}" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
+          <p class="mt-6 text-4xl font-semibold text-gray-600">
             Round {{ current_round }} of {{ max_rounds }}
           </p>
         </div>
       </div>
-
-      <div class="mt-12 mr-16 flex flex-row items-center">
-        <div class="grid gap-2 grid-rows-2 items-center text-2xl text-gray-600">
-          <p>{{ username }}</p>
-          <p>Best Score: {{ best_score }}</p>
+      <div class="mt-12 mr-16 flex flex-row items-start">
+        <div class="grid gap-2 grid-rows-2 items-center text-2xl">
+          <div class="flex flex-col items-end">
+            <p class="text-gray-600">{{ username }}</p>
+          </div>
+          <div class="flex flex-col items-end">
+            <p class="text-gray-600">Best Score: {{ best_score }}</p>
+          </div>
         </div>
       </div>
     </section>
@@ -82,3 +83,4 @@
   </main>
 </body>
 </html>
+
