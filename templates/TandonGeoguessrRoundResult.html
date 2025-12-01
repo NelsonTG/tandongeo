@@ -19,19 +19,13 @@
           </p>
         </div>
       </div>
-      <div class="mt-12 mr-16 flex flex-row items-start">
-        <div class="grid gap-2 grid-rows-2 items-center text-2xl">
-          <div class="flex flex-col items-end">
-            <p class="text-gray-600">{{ username }}</p>
-          </div>
-          <div class="flex flex-col items-end">
-            <p class="text-gray-600">Best Score: {{ best_score }}</p>
-          </div>
-        </div>
-      </div>
+      <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start text-2xl text-right text-gray-600">
+        <p>{{ username }}</p>
+        <p>Best Score: {{ best_score }}</p>
+      </section>
     </section>
   </header>
-
+  
   <main class="mt-12 mx-auto max-w-7xl flex flex-row gap-16">
     <!-- Left: picture area (you can wire this up later if you want) -->
     <section class="ml-16 h-[70vh] flex-1 bg-blue-200 flex items-center justify-center">
@@ -83,4 +77,5 @@
   </main>
 </body>
 </html>
+
 
