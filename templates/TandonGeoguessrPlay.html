@@ -50,21 +50,6 @@
       {% endif %}
     </section>
 
-<!-- DEV ONLY: show correct answer so you can test scoring -->
-<div style="
-  margin-top: 20px;
-  padding: 12px;
-  background-color: #fee;
-  border: 2px dashed red;
-  font-size: 18px;
-">
-  <strong>DEBUG – Correct Answer (for testing only):</strong>
-  <p>Building: {{ photo.building }}</p>
-  <p>Floor: {{ photo.floor }}</p>
-  <p>Room: {{ photo.room }}</p>
-</div>
-
-
     <!-- REAL FORM THAT SENDS DATA TO FLASK -->
     <form method="POST" action="{{ url_for('submit_guess') }}">
 
@@ -194,3 +179,4 @@
   </script>
 </body>
 </html>
+
