@@ -39,37 +39,37 @@
 </section>
 
     <!-- Right: guess + score -->
-    <section class="mr-16 my-12 flex flex-col items-center gap-6">
-      <p class="text-6xl font-bold text-gray-600">Your Guess:</p>
-      <div class="bg-violet-200 text-3xl p-4 border border-violet-400 min-w-[18rem]">
+    <section class="mr-16 flex flex-col items-center gap-4">
+      <p class="text-5xl font-bold text-gray-600">Your Guess:</p>
+      <div class="bg-violet-200 text-4xl p-2 border border-violet-400 min-w-[18rem]">
         <p>Building: {{ guessed_building }}</p>
-        <p>Floor: {{ guessed_floor }}</p>
         <p>Room: {{ guessed_room }}</p>
+        <p>Floor: {{ guessed_floor }}</p>
       </div>
 
-      <p class="mt-4 text-6xl font-bold text-gray-600">Your Score:</p>
-      <div class="bg-violet-200 text-3xl p-4 border border-violet-400 min-w-[18rem]">
+      <p class="text-4xl font-bold text-gray-600">Your Score:</p>
+      <div class="bg-violet-200 text-3xl p-2 border border-violet-400 min-w-[18rem]">
         <p>Score this round: {{ round_score }}</p>
-        <p class="mt-2 text-2xl">Total score: {{ total_score }}</p>
+        <p class="mt-2">Total score: {{ total_score }}</p>
       </div>
 
-      <!-- Optional: show correct answer -->
-      <p class="mt-4 text-4xl font-bold text-gray-600">Correct Location:</p>
-      <div class="bg-violet-100 text-2xl p-3 border border-violet-300 min-w-[18rem]">
+      <!-- show correct answer -->
+      <p class="text-4xl font-bold text-gray-600">Correct Location:</p>
+      <div class="bg-violet-100 text-3xl p-2 border border-violet-300 min-w-[18rem]">
         <p>Building: {{ correct_building }}</p>
-        <p>Floor: {{ correct_floor }}</p>
         <p>Room: {{ correct_room }}</p>
+        <p>Floor: {{ correct_floor }}</p>
       </div>
 
       <!-- Next round / finish button -->
       {% if is_final_round %}
         <a href="{{ url_for('home') }}"
-           class="mt-8 px-10 py-4 rounded-md bg-violet-800 text-white text-xl hover:opacity-95 transition">
+           class="mt-4 px-10 py-4 rounded-md bg-violet-800 text-white text-xl hover:opacity-95 transition">
           Finish Game
         </a>
       {% else %}
         <a href="{{ url_for('play') }}"
-           class="mt-8 px-10 py-4 rounded-md bg-violet-800 text-white text-xl hover:opacity-95 transition">
+           class="mt-4 px-10 py-4 rounded-md bg-violet-800 text-white text-xl hover:opacity-95 transition">
           Next Round
         </a>
       {% endif %}
