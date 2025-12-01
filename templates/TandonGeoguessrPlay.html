@@ -131,6 +131,7 @@
       }
   
       input.addEventListener("focus", () => showList(options))
+      input.addEventListener("click", () => showList(options))
       input.addEventListener("input", () => {
         const v = input.value.toLowerCase()
         const filtered = options.filter(o => o.toLowerCase().startsWith(v))
@@ -183,6 +184,7 @@
   </script>
 </body>
 </html>
+
 
 
 
