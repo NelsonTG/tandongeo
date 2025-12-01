@@ -115,73 +115,83 @@
     </form>
   </main>
   <script>
-    async function fetchBuildings() {
-      const res = await fetch("/api/buildings");
-      return await res.json();
-    }
-
-    async function fetchFloors(building) {
-      if (!building) return [];
-      const res = await fetch(`/api/floors?building=${encodeURIComponent(building)}`);
-      return await res.json();
-    }
-
-    async function fetchRooms(building, floor) {
-      if (!building || !floor) return [];
-      const res = await fetch(`/api/rooms?building=${encodeURIComponent(building)}&floor=${encodeURIComponent(floor)}`);
-      return await res.json();
-    }
-
-    function createAutocomplete(containerId, inputId, optionsFetcher) {
-      const container = document.getElementById(containerId);
-      const input = document.getElementById(inputId);
-      const list = container.querySelector("ul");
-
-      async function populateDropdown(value) {
-        const options = await optionsFetcher(value);
-        list.innerHTML = "";
-        options.forEach(opt => {
-          const li = document.createElement("li");
-          li.textContent = opt;
-          li.className = "p-2 hover:bg-gray-200 cursor-pointer";
+    function createAutocomplete(containerId, inputId, options, onSelect) {
+      const container = document.getElementById(containerId)
+      const input = document.getElementById(inputId)
+      const list = container.querySelector("ul")
+  
+      function showList(items) {
+        list.innerHTML = ""
+        items.forEach(opt => {
+          const li = document.createElement("li")
+          li.textContent = opt
+          li.className = "p-2 hover:bg-gray-200 cursor-pointer"
+  
           li.addEventListener("click", () => {
-            input.value = opt;
-            list.classList.add("hidden");
-            input.dispatchEvent(new Event("input")); // trigger next level
-          });
-          list.appendChild(li);
-        });
-        list.classList.toggle("hidden", options.length === 0);
+            input.value = opt
+            list.classList.add("hidden")
+            if (onSelect) onSelect(opt)
+          })
+  
+          list.appendChild(li)
+        })
+        list.classList.toggle("hidden", items.length === 0)
       }
-
-      input.addEventListener("focus", () => populateDropdown(input.value));
-      input.addEventListener("input", () => populateDropdown(input.value));
-
-      document.addEventListener("click", (e) => {
-        if (!container.contains(e.target)) {
-          list.classList.add("hidden");
-        }
-      });
+  
+      input.addEventListener("focus", () => showList(options))
+      input.addEventListener("input", () => {
+        const v = input.value.toLowerCase()
+        const filtered = options.filter(o => o.toLowerCase().startsWith(v))
+        showList(filtered)
+      })
+  
+      document.addEventListener("click", e => {
+        if (!container.contains(e.target)) list.classList.add("hidden")
+      })
     }
-
-    // Initialize building autocomplete
-    createAutocomplete("building_container", "guessed_building", async () => await fetchBuildings());
-
-    // When building changes, update floors
-    createAutocomplete("floor_container", "guessed_floor", async () => {
-      const building = document.getElementById("guessed_building").value;
-      return await fetchFloors(building);
-    });
-
-    // When floor changes, update rooms
-    createAutocomplete("room_container", "guessed_room", async () => {
-      const building = document.getElementById("guessed_building").value;
-      const floor = document.getElementById("guessed_floor").value;
-      return await fetchRooms(building, floor);
-    });
+  
+    let buildingList = []
+    fetch("/api/buildings")
+      .then(r => r.json())
+      .then(buildings => {
+        buildingList = buildings
+        createAutocomplete(
+          "building_container",
+          "guessed_building",
+          buildingList,
+          onBuildingSelected
+        )
+      })
+  
+    function onBuildingSelected(building) {
+      fetch(`/api/floors?building=${encodeURIComponent(building)}`)
+        .then(r => r.json())
+        .then(floors => {
+          createAutocomplete(
+            "floor_container",
+            "guessed_floor",
+            floors,
+            onFloorSelected
+          )
+        })
+    }
+  
+    function onFloorSelected(floor) {
+      const building = document.getElementById("guessed_building").value
+      fetch(`/api/rooms?building=${encodeURIComponent(building)}&floor=${floor}`)
+        .then(r => r.json())
+        .then(rooms => {
+          createAutocomplete(
+            "room_container",
+            "guessed_room",
+            rooms
+          )
+        })
+    }
   </script>
 </body>
 </html>
+
 
 
 
