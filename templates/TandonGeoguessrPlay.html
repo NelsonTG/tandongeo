@@ -12,7 +12,6 @@
 </head>
 
 <body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
-
   <header>
     <section class="flex flex-row justify-between">
       <div class="ml-16 flex flex-row">
@@ -23,16 +22,10 @@
           </p>
         </div>
       </div>
-      <div class="mt-12 mr-16 flex flex-row items-start">
-        <div class="grid gap-2 grid-rows-2 items-center text-2xl">
-          <div class="flex flex-col items-end">
-            <p class="text-gray-600">{{ username }}</p>
-          </div>
-          <div class="flex flex-col items-end">
-            <p class="text-gray-600">Best Score: {{ best_score }}</p>
-          </div>
-        </div>
-      </div>
+      <section class="mt-12 mr-16 grid gap-2 grid-rows-2 items-start text-2xl text-right text-gray-600">
+        <p>{{ username }}</p>
+        <p>Best Score: {{ best_score }}</p>
+      </section>
     </section>
   </header>
 
@@ -190,6 +183,7 @@
   </script>
 </body>
 </html>
+
 
 
 
