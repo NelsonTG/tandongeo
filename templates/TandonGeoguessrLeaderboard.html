@@ -8,21 +8,16 @@
 </head>
 
 <body style="font-family: 'Comic Sans MS';" class="antialiased bg-gray-50 text-gray-800">
-  <header class="flex justify-between items-start mt-8 mx-16">
-    <div class="text-xl">
-      <a href="{{ url_for('home') }}" class="text-blue-600 hover:underline mr-4">Home</a>
-    </div>
-
-    <section class="grid gap-2 grid-rows-2 text-right">
-      <p class="text-gray-600 text-2xl">{{ username }}</p>
-      <p class="text-gray-600 text-2xl">Best Score: {{ best_score }}</p>
+  <header>
+    <section class="grid gap-2 grid-rows-2 text-right text-gray-600 text-2xl">
+      <p>{{ username }}</p>
+      <p>Best Score: {{ best_score }}</p>
     </section>
   </header>
 
   <main class="mt-12 mx-auto max-w-7xl">
     <section class="flex flex-col items-center gap-4">
-      <p class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</p>
-
+      <a href="{{ url_for('home') }}" class="text-6xl font-extrabold leading-tight">Tandon Geoguesser</a>
       <p class="text-3xl font-semibold text-gray-600">
         Week of {{ date1 }} - {{ date2 }}
       </p>
